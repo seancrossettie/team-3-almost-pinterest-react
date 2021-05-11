@@ -7,7 +7,7 @@ const dbURL = firebaseConfig.databaseURL;
 
 // Get request
 const getData = () => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/boards.json`)
+  axios.get(`${dbURL}/data.json`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });

@@ -21,7 +21,7 @@ const BoardCard = ({
       case 'delete':
         console.warn(firebaseKey);
         // // deleteBoard(firebaseKey)
-        //   .then((bookArray) => setBooks(bookArray));
+        //   .then((boardArray) => setBoards(boardArray));
         break;
       case 'edit':
         setEditing((prevState) => !prevState);

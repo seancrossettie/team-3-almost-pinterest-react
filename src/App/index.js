@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import './App.scss';
+import './Apps.scss';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
+import NavBar from '../components/NavBar';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null
@@ -27,8 +29,12 @@ function App() {
 
   return (
     <>
-      <Routes />
-      <h1>React Template</h1>
+     <Router>
+      <NavBar user={user} />
+      <Routes
+      user={user}
+      />
+      </Router>
     </>
   );
 }

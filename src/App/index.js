@@ -5,11 +5,13 @@ import './Apps.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
+import { getPins } from '../helpers/data/pinData';
 import { getBoards } from '../helpers/data/data';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null
   const [user, setUser] = useState(null);
+  const [pins, setPins] = useState([]);
   const [boards, setBoards] = useState([]);
 
   // Authentication for Firebase on initial render
@@ -23,11 +25,16 @@ function App() {
           user: authed.email.split('@')[0]
         };
         setUser(userObj);
+        getPins(userObj).then(setPins);
       } else if (user || user === null) {
         setUser(false);
       }
     });
   }, []);
+
+  // useEffect(() => {
+  //   getPins(user).then(setPins);
+  // }, []);
 
   useEffect(() => {
     getBoards().then(setBoards);
@@ -36,11 +43,13 @@ function App() {
   return (
     <>
      <Router>
-        <NavBar user={user} />
-        <Routes
-          user={user}
-          boards={boards}
-          setBoards={setBoards}
+      <NavBar user={user} />
+      <Routes
+      user={user}
+      pins={pins}
+      setPins={setPins}
+      boards={boards}
+      setBoards={setBoards}
         />
       </Router>
     </>

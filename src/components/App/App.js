@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import './App.scss';
-import Routes from '../helpers/Routes';
+import Routes from '../../helpers/Routes';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null

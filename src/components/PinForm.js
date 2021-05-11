@@ -3,11 +3,11 @@ import {
   Button, Form, FormGroup, Label, Input, Card
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-// import { addPin, updatePins } from '../
+import { createPin, updatePin } from '../helpers/data/pinData';
 
 const PinForm = ({
   formTitle,
-  // setPins,
+  setPins,
   pinTitle,
   pinDescription,
   imgUrl,
@@ -34,9 +34,9 @@ const PinForm = ({
     e.preventDefault();
     if (pin.firebaseKey) {
       console.warn(firebaseKey);
-      // updatePins(pin).then(setPins);
+      updatePin(pin).then(setPins);
     } else {
-      // addPin(pin).then(setPins);
+      createPin(pin).then(setPins);
 
       // clear inputs
       setPin({

@@ -36,7 +36,7 @@ export default function Routes({
           exact
           user={user}
           path='/pins'
-          component={() => <PinCard pins={pins} setPins={setPins} />}
+          component={() => <PinCard user={user} pins={pins} setPins={setPins} />}
         />
       <PrivateRoute
         user={user}
@@ -46,7 +46,7 @@ export default function Routes({
       <PrivateRoute
         user={user}
         path='/add-pins'
-        component={() => <AddPin setPins={setPins} />}
+        component={() => <AddPin user={user} setPins={setPins} />}
         />
       <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
     </Switch>

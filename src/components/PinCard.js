@@ -13,6 +13,7 @@ const PinCard = ({
   pinTitle,
   pinDescription,
   imgUrl,
+  uid,
   setPins
 }) => {
   const [editing, setEditing] = useState(false);
@@ -48,6 +49,7 @@ const PinCard = ({
       pinTitle={pinTitle}
       imgUrl={imgUrl}
       pinDescription={pinDescription}
+      uid={uid}
       />}
       </Card>
   );
@@ -58,7 +60,8 @@ PinCard.propTypes = {
   pinTitle: PropTypes.string,
   pinDescription: PropTypes.string,
   imgUrl: PropTypes.string,
-  setPins: PropTypes.func
+  setPins: PropTypes.func,
+  uid: PropTypes.any
 };
 
 export default PinCard;

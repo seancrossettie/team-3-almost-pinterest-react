@@ -12,10 +12,6 @@ function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null
   const [user, setUser] = useState(null);
   const [pins, setPins] = useState([]);
-
-  useEffect(() => {
-    getPins().then(setPins);
-  }, []);
   const [boards, setBoards] = useState([]);
 
   // Authentication for Firebase on initial render
@@ -29,11 +25,16 @@ function App() {
           user: authed.email.split('@')[0]
         };
         setUser(userObj);
+        getPins(userObj).then(setPins);
       } else if (user || user === null) {
         setUser(false);
       }
     });
   }, []);
+
+  // useEffect(() => {
+  //   getPins(user).then(setPins);
+  // }, []);
 
   useEffect(() => {
     getBoards().then(setBoards);

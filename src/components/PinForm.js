@@ -12,14 +12,15 @@ const PinForm = ({
   pinDescription,
   imgUrl,
   firebaseKey,
-  uid
+  uid,
+  user
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: uid || null,
+    uid: user.uid || uid
   });
 
   const handleInputChange = (e) => {
@@ -36,7 +37,7 @@ const PinForm = ({
       console.warn(firebaseKey);
       updatePin(pin).then(setPins);
     } else {
-      createPin(pin).then(setPins);
+      createPin(pin, user).then(setPins);
 
       // clear inputs
       setPin({
@@ -105,7 +106,8 @@ PinForm.propTypes = {
   pinDescription: PropTypes.string,
   imgUrl: PropTypes.string,
   firebaseKey: PropTypes.string,
-  uid: PropTypes.string
+  uid: PropTypes.string,
+  user: PropTypes.any
 };
 
 export default PinForm;

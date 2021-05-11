@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BoardCard from '../components/BoardCard';
+import BoardCards from '../components/BoardCards';
 import BoardForm from '../components/BoardForm';
 import '../App/Apps.scss';
 
@@ -14,7 +14,7 @@ function Boards({ boards, setBoards }) {
       <hr/>
       <div className="card-container">
         {boards.map((boardInfo) => (
-          <BoardCard
+          <BoardCards
             key={boardInfo.firebaseKey}
             firebaseKey={boardInfo.firebaseKey}
             boardTitle={boardInfo.boardTitle}

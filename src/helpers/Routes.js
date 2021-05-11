@@ -6,7 +6,7 @@ import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 import AddBoard from '../views/AddBoard';
 import AddPin from '../views/AddPins';
-import PinCard from '../components/PinCard';
+import Pins from '../views/Pins';
 
 // The PrivateRoute function is creating a private route and returing the specified route based on the props
 // We specify the specific props we want to use in the routeChecker and pass the rest with the spread
@@ -36,7 +36,7 @@ export default function Routes({
           exact
           user={user}
           path='/pins'
-          component={() => <PinCard user={user} pins={pins} setPins={setPins} />}
+          component={() => <Pins user={user} pins={pins} setPins={setPins} />}
         />
       <PrivateRoute
         user={user}

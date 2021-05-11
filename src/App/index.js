@@ -5,10 +5,12 @@ import './Apps.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
+import { getBoards } from '../helpers/data/data';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null
   const [user, setUser] = useState(null);
+  const [boards, setBoards] = useState([]);
 
   // Authentication for Firebase on initial render
   useEffect(() => {
@@ -27,13 +29,19 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    getBoards().then(setBoards);
+  }, []);
+
   return (
     <>
      <Router>
-      <NavBar user={user} />
-      <Routes
-      user={user}
-      />
+        <NavBar user={user} />
+        <Routes
+          user={user}
+          boards={boards}
+          setBoards={setBoards}
+        />
       </Router>
     </>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import BoardView from '../views/BoardView';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 
@@ -21,15 +22,18 @@ PrivateRoute.propTypes = {
   component: PropTypes.any
 };
 
-export default function Routes({ user }) {
+export default function Routes({ user, boards, setBoards }) {
   return (
     <Switch>
       <Route exact path='/' component={() => <Home user={user}/>} />
       <Route exact path='/not-found' component={NotFound} />
+      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
     </Switch>
   );
 }
 
 Routes.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  boards: PropTypes.array,
+  setBoards: PropTypes.func.isRequired
 };

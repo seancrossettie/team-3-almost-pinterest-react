@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import BoardView from '../views/BoardView';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 import AddBoard from '../views/AddBoard';
@@ -25,7 +26,7 @@ PrivateRoute.propTypes = {
 };
 
 export default function Routes({
-  user, setBoards, setPins, pins
+  user, boards, setBoards, setPins, pins
 }) {
   return (
     <Switch>
@@ -47,6 +48,7 @@ export default function Routes({
         path='/add-pins'
         component={() => <AddPin setPins={setPins} />}
         />
+      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
     </Switch>
   );
 }

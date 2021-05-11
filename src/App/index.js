@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     getPins().then(setPins);
   }, []);
+  const [boards, setBoards] = useState([]);
 
   // Authentication for Firebase on initial render
   useEffect(() => {
@@ -34,6 +35,10 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    getBoards().then(setBoards);
+  }, []);
+
   return (
     <>
      <Router>
@@ -42,7 +47,9 @@ function App() {
       user={user}
       pins={pins}
       setPins={setPins}
-      />
+      boards={boards}
+      setBoards={setBoards}
+        />
       </Router>
     </>
   );

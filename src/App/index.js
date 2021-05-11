@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
 import { getPins } from '../helpers/data/pinData';
+import { getBoards } from '../helpers/data/data';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null

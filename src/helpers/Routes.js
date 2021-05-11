@@ -56,5 +56,5 @@ Routes.propTypes = {
   setBoards: PropTypes.func.isRequired,
   setPins: PropTypes.func.isRequired,
   pins: PropTypes.array.isRequired,
-
+  boards: PropTypes.array,
 };

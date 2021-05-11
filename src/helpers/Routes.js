@@ -3,6 +3,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
+import AddBoard from '../views/AddBoard';
+import AddPin from '../views/AddPins';
 
 // The PrivateRoute function is creating a private route and returing the specified route based on the props
 // We specify the specific props we want to use in the routeChecker and pass the rest with the spread
@@ -21,15 +23,28 @@ PrivateRoute.propTypes = {
   component: PropTypes.any
 };
 
-export default function Routes({ user }) {
+export default function Routes({ user, setBoards, setPins }) {
   return (
     <Switch>
       <Route exact path='/' component={() => <Home user={user}/>} />
       <Route exact path='/not-found' component={NotFound} />
+      <PrivateRoute
+        user={user}
+        path='/add-boards'
+        component={() => <AddBoard setBoards={setBoards} />}
+        />
+      <PrivateRoute
+        user={user}
+        path='/add-pins'
+        component={() => <AddPin setPins={setPins} />}
+        />
     </Switch>
   );
 }
 
 Routes.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  setBoards: PropTypes.func.isRequired,
+  setPins: PropTypes.func.isRequired,
+
 };

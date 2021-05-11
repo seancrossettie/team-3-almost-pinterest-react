@@ -6,8 +6,8 @@ const dbURL = firebaseConfig.databaseURL;
 // '/data.json' is a boilerplate endpoint
 
 // Get request
-const getData = () => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/data.json`)
+const getBoards = () => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/boards.json`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
@@ -19,7 +19,7 @@ const createData = (obj) => new Promise((resolve, reject) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbURL}/data/${response.data.name}.json`, body)
         .then(() => {
-          getData((resp) => resolve(resp));
+          getBoards((resp) => resolve(resp));
         });
     })
     .catch((error) => reject(error));
@@ -29,7 +29,7 @@ const createData = (obj) => new Promise((resolve, reject) => {
 const deleteData = (firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbURL}/data/${firebaseKey}.json`)
     .then(() => {
-      getData((resp) => resolve(resp));
+      getBoards((resp) => resolve(resp));
     })
     .catch((error) => reject(error));
 });
@@ -37,11 +37,11 @@ const deleteData = (firebaseKey) => new Promise((resolve, reject) => {
 const updateData = (obj) => new Promise((resolve, reject) => {
   axios.patch(`${dbURL}/data/${obj.firebaseKey}.json`, obj)
     .then(() => {
-      getData((resp) => resolve(resp));
+      getBoards((resp) => resolve(resp));
     })
     .catch((error) => reject(error));
 });
 
 export {
-  getData, createData, deleteData, updateData
+  getBoards, createData, deleteData, updateData
 };

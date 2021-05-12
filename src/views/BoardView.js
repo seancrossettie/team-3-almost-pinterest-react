@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BoardCards from '../components/BoardCards';
 
 const BoardView = ({ boards, user, setBoards }) => (
-    <div>
+    <div className="board-container">
       {boards.map((boardObj) => (
         <BoardCards
           key={boardObj.firebaseKey}

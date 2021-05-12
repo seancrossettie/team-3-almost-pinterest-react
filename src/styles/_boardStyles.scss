@@ -1,0 +1,10 @@
+.board-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.board-card {
+  width: 20rem;
+  height: fit-content;
+}

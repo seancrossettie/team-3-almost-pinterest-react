@@ -6,7 +6,7 @@ import PinCard from '../components/PinCard';
 function Pins({ pins, setPins }) {
   return (
     <>
-      <div className="card-container">
+      <div className="board-container">
         {pins.map((pinInfo) => (
           <PinCard
             key={pinInfo.firebaseKey}

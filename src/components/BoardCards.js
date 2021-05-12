@@ -39,7 +39,7 @@ const BoardCards = ({
 
   return (
     <div>
-      <Card key={firebaseKey}>
+      <Card className="m-4 board-card" key={firebaseKey}>
         <CardBody>
           <CardTitle tag="h5">{boardTitle}</CardTitle>
         </CardBody>

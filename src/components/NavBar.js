@@ -9,7 +9,7 @@ import {
   NavItem,
   Button
 } from 'reactstrap';
-import { signInUser, signOutUser } from '../helpers/auth';
+import { signOutUser } from '../helpers/auth';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +36,7 @@ const NavBar = ({ user }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
+      <img className= "navbar-logo" src="https://logos-world.net/wp-content/uploads/2020/09/Pinterest-Logo.png"/>
       <Link className="navbar-brand" to="/">Home</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -47,7 +48,7 @@ const NavBar = ({ user }) => {
                 {
                   user
                     ? <Button color='danger' onClick={signOutUser}>Log Out</Button>
-                    : <Button color='info' onClick={signInUser}>Sign In</Button>
+                    : ''
                 }
               </NavItem>
             }

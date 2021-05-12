@@ -4,7 +4,7 @@ import BoardCards from '../components/BoardCards';
 
 export default function BoardView({ boards, user, setBoards }) {
   return (
-    <div>
+    <div className="board-container">
       {boards.map((boardObj) => (
         <BoardCards
           key={boardObj.firebaseKey}

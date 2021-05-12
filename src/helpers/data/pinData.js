@@ -6,13 +6,8 @@ const dbURL = firebaseConfig.databaseURL;
 // Get request
 const getPins = (user) => new Promise((resolve, reject) => {
   axios.get(`${dbURL}/pins.json?orderBy="uid"&equalTo="${user.uid}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    }).catch((error) => reject(error));
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
 });
 
 // Get Public Pins

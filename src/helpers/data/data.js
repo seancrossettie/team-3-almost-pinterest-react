@@ -26,11 +26,9 @@ const createBoard = (obj) => new Promise((resolve, reject) => {
 });
 
 // Delete request
-const deleteBoard = (firebaseKey) => new Promise((resolve, reject) => {
+const deleteBoard = (firebaseKey, user) => new Promise((resolve, reject) => {
   axios.delete(`${dbURL}/boards/${firebaseKey}.json`)
-    .then(() => {
-      getBoards((resp) => resolve(resp));
-    })
+    .then(() => getBoards(user).then((resp) => resolve(resp)))
     .catch((error) => reject(error));
 });
 

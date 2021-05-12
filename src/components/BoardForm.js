@@ -3,23 +3,24 @@ import {
   Button, Form, FormGroup, Label, Input, Card
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-// import { addBoard, updateBoards } from '../
+import { createBoard, updateBoard } from '../helpers/data/data';
 
 const BoardForm = ({
   formTitle,
-  // setBoards,
+  setBoards,
   boardTitle,
   boardDescription,
   imgUrl,
   firebaseKey,
-  uid
+  uid,
+  user
 }) => {
   const [board, setBoard] = useState({
     boardTitle: boardTitle || '',
     boardDescription: boardDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: uid || null,
+    uid: user.uid || uid
   });
 
   const handleInputChange = (e) => {
@@ -34,9 +35,9 @@ const BoardForm = ({
     e.preventDefault();
     if (board.firebaseKey) {
       console.warn(firebaseKey);
-      // updateBoards(board).then(setBoards);
+      updateBoard(board).then(setBoards);
     } else {
-      // addBoard(board).then(setBoards);
+      createBoard(board, user).then(setBoards);
 
       // clear inputs
       setBoard({
@@ -106,7 +107,8 @@ BoardForm.propTypes = {
   boardDescription: PropTypes.string,
   imgUrl: PropTypes.string,
   firebaseKey: PropTypes.string,
-  uid: PropTypes.string
+  uid: PropTypes.string,
+  user: PropTypes.any
 };
 
 export default BoardForm;

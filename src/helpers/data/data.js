@@ -14,10 +14,10 @@ const getBoards = () => new Promise((resolve, reject) => {
 
 // Create Boards
 const createBoard = (obj) => new Promise((resolve, reject) => {
-  axios.post(`${dbURL}/data.json`, obj)
+  axios.post(`${dbURL}/boards.json`, obj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
-      axios.patch(`${dbURL}/data/${response.data.name}.json`, body)
+      axios.patch(`${dbURL}/boards/${response.data.name}.json`, body)
         .then(() => {
           getBoards((resp) => resolve(resp));
         });
@@ -27,7 +27,7 @@ const createBoard = (obj) => new Promise((resolve, reject) => {
 
 // Delete request
 const deleteBoard = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.delete(`${dbURL}/data/${firebaseKey}.json`)
+  axios.delete(`${dbURL}/boards/${firebaseKey}.json`)
     .then(() => {
       getBoards((resp) => resolve(resp));
     })
@@ -35,7 +35,7 @@ const deleteBoard = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const updateBoard = (obj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbURL}/data/${obj.firebaseKey}.json`, obj)
+  axios.patch(`${dbURL}/boards/${obj.firebaseKey}.json`, obj)
     .then(() => {
       getBoards((resp) => resolve(resp));
     })

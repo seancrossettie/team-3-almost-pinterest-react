@@ -41,7 +41,7 @@ export default function Routes({
       <PrivateRoute
         user={user}
         path='/add-boards'
-        component={() => <AddBoard setBoards={setBoards} />}
+        component={() => <AddBoard user={user} setBoards={setBoards} />}
         />
       <PrivateRoute
         user={user}

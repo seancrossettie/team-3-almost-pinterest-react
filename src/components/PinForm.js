@@ -36,21 +36,11 @@ const PinForm = ({
       updatePin(pin).then(setPins);
     } else {
       createPin(pin, user).then(setPins);
-
-      // clear inputs
-      setPin({
-        pinTitle: '',
-        pinDescription: '',
-        imgUrl: '',
-        firebaseKey: null,
-        uid: null,
-      });
     }
   };
 
   const handleBoardAssign = (e) => {
     e.preventDefault();
-    console.warn(e.target.value);
   };
 
   return (
@@ -95,13 +85,12 @@ const PinForm = ({
         </FormGroup>
         <FormGroup>
           <Label for="exampleSelect">Select a Board</Label>
-          <Input type="select" name="select">
+          <Input type="select" name="select" onClick={handleBoardAssign}>
             <option value="">Select</option>
             {boards.map((boardObj) => (
                     <option
                       value={boardObj.firebaseKey}
                       key={boardObj.firebaseKey}
-                      onClick={handleBoardAssign}
                     >
                       {boardObj.boardTitle}
                     </option>

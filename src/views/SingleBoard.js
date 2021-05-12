@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { Card } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import { getSingleBoard } from '../helpers/data/data';
 import { getBoardPins } from '../helpers/data/pinData';
 
@@ -22,9 +22,11 @@ export default function SingleBoard() {
       <h1>Pin belongs to {board.boardTitle} board</h1>
       {pinBoard.map((pinBoardArray) => (
         <Card key={pinBoardArray.firebaseKey}>
-          <h2>{pinBoardArray.pinTitle}</h2>
-          <img src={pinBoardArray.imgUrl}/>
-          <p>{pinBoardArray.pinDescription}</p>
+          <CardBody>
+            <h2>{pinBoardArray.pinTitle}</h2>
+            <img src={pinBoardArray.imgUrl}/>
+            <p>{pinBoardArray.pinDescription}</p>
+          </CardBody>
         </Card>
       ))}
     </div>

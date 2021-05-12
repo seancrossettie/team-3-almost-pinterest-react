@@ -54,6 +54,7 @@ const PinCard = ({
         imgUrl={imgUrl}
         pinDescription={pinDescription}
         uid={uid}
+        user={user}
         privatePin={privatePin}
         />}
       </Card>

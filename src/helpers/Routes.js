@@ -31,7 +31,6 @@ export default function Routes({
   return (
     <Switch>
       <Route exact path='/' component={() => <Home user={user}/>} />
-      <Route exact path='/not-found' component={NotFound} />
       <PrivateRoute
           exact
           user={user}
@@ -53,6 +52,7 @@ export default function Routes({
         path='/board/:id'
         user={user}
         component={() => <SingleBoard setPinBoard={setPinBoard}/>} />
+        <Route exact path='/*' component={NotFound} />
     </Switch>
   );
 }

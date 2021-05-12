@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, Form, FormGroup, Label, Input, Card
+  Button, Form, FormGroup, Label, Input, Card, ModalFooter, Modal, ModalHeader, ModalBody
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { createBoard, updateBoard } from '../helpers/data/data';
@@ -14,8 +14,13 @@ const BoardForm = ({
   firebaseKey,
   uid,
   user,
-  privateBoard
+  privateBoard,
+  className,
 }) => {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
   const [board, setBoard] = useState({
     boardTitle: boardTitle || '',
     boardDescription: boardDescription || '',
@@ -53,9 +58,11 @@ const BoardForm = ({
   };
 
   return (
-    <>
     <div className='board-form'>
     <Card body>
+    <Modal isOpen={modal} toggle={toggle} className={className}>
+        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalBody>
       <Form id='addBoardForm' autoComplete='off' onSubmit={handleSubmit}>
         <h2>{formTitle}</h2>
         <FormGroup>
@@ -107,9 +114,14 @@ const BoardForm = ({
         </FormGroup>
         <Button type='submit'>Submit</Button>
       </Form>
+      </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
       </Card>
     </div>
-    </>
   );
 };
 
@@ -122,7 +134,9 @@ BoardForm.propTypes = {
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
   user: PropTypes.any,
-  privateBoard: PropTypes.bool
+  privateBoard: PropTypes.bool,
+  className: PropTypes.string
+
 };
 
 export default BoardForm;

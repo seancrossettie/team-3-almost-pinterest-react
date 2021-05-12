@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BoardCards from '../components/BoardCards';
 
-const BoardView = ({ boards, user, setBoards }) => (
+export default function BoardView({ boards, user, setBoards }) {
+  return (
     <div className="board-container">
       {boards.map((boardObj) => (
         <BoardCards
@@ -13,12 +14,11 @@ const BoardView = ({ boards, user, setBoards }) => (
         />
       ))}
     </div>
-);
+  );
+}
 
 BoardView.propTypes = {
   boards: PropTypes.array,
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any
 };
-
-export default BoardView;

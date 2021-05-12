@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PinForm from './PinForm';
+import { deletePin } from '../helpers/data/pinData';
 
 const PinCard = ({
   firebaseKey,
@@ -14,15 +15,15 @@ const PinCard = ({
   pinDescription,
   imgUrl,
   uid,
+  user,
   setPins
 }) => {
   const [editing, setEditing] = useState(false);
   const handleClick = (type) => {
     switch (type) {
       case 'delete':
-        console.warn(firebaseKey);
-        // // deletePin(firebaseKey)
-        //   .then((boardArray) => setBoards(boardArray));
+        deletePin(firebaseKey, user)
+          .then(setPins);
         break;
       case 'edit':
         setEditing((prevState) => !prevState);
@@ -63,7 +64,8 @@ PinCard.propTypes = {
   pinDescription: PropTypes.string,
   imgUrl: PropTypes.string,
   setPins: PropTypes.func,
-  uid: PropTypes.any
+  uid: PropTypes.any,
+  user: PropTypes.any,
 };
 
 export default PinCard;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Button,
   Card,
   CardText,
   CardTitle,
+  Button
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PinForm from './PinForm';

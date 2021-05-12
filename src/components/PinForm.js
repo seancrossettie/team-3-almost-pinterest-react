@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, Form, FormGroup, Label, Input, Card
+  Button, Form, FormGroup, Label, Input, Card, Dropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { createPin, updatePin } from '../helpers/data/pinData';
@@ -12,16 +12,22 @@ const PinForm = ({
   pinDescription,
   imgUrl,
   firebaseKey,
-  uid,
-  user
+  user,
+  boards,
+  pins
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || uid
+    boardId: boardId || null,
+    uid: user.uid || null
   });
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const handleInputChange = (e) => {
     setPin((prevState) => ({
@@ -50,6 +56,13 @@ const PinForm = ({
     }
   };
 
+  const [boardId, setBoardId] = useState();
+
+  // const handleBoardAssign = (firebaseKey) => {
+  //   e.preventDefault();
+  //   if ()
+  // }
+
   return (
     <>
     <div className='pin-form'>
@@ -67,7 +80,6 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
-
         <FormGroup>
           <Label for="pinDescription">Description:</Label>
           <Input
@@ -91,6 +103,16 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle} className='mb-3'>
+            <DropdownToggle caret>
+              Assign to a Board
+            </DropdownToggle>
+            <DropdownMenu>
+              {boards.map((boardObj) => (
+                <DropdownItem key={boardObj.firebaseKey}>{boardObj.boardTitle}</DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
         <Button type='submit'>Submit</Button>
       </Form>
       </Card>
@@ -107,7 +129,9 @@ PinForm.propTypes = {
   imgUrl: PropTypes.string,
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
-  user: PropTypes.any
+  user: PropTypes.any,
+  boards: PropTypes.array.isRequired,
+  pins: PropTypes.array,
 };
 
 export default PinForm;

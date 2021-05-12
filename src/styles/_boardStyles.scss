@@ -8,3 +8,41 @@
   width: 20rem;
   height: fit-content;
 }
+
+.edit-link {
+  color: $darkGrey;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.delete-link {
+  color: $pinRed;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.pins-link {
+  color: $white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: $pinRed;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.pins-link:hover {
+  color: $pinRed;
+  background-color: $lightgGrey;
+}
+
+.edit-link:hover {
+  color: $pinRed
+}
+
+.delete-link:hover {
+  color: $darkGrey
+}
+
+.card-links {
+  text-align: center;
+}

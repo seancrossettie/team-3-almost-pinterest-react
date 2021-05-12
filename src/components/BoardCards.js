@@ -48,9 +48,11 @@ const BoardCards = ({
         <CardBody>
           <CardText>{boardDescription}</CardText>
           {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
-          <CardLink href="#" onClick={() => handleCardButton('edit')}>Edit</CardLink>
-          <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
-          <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
+          <div className='card-links'>
+            <CardLink className="edit-link" href="#" onClick={() => handleCardButton('edit')}>Edit</CardLink>
+            <CardLink className="delete-link" href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
+            <CardLink className="pins-link" href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
+          </div>
         </CardBody>
       </Card>
     </div>

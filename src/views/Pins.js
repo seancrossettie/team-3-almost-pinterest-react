@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../App/Apps.scss';
 import PinCard from '../components/PinCard';
 
-function Pins({ pins, setPins }) {
+function Pins({ pins, setPins, user }) {
   return (
     <>
       <div className="card-container">
@@ -18,6 +18,7 @@ function Pins({ pins, setPins }) {
             private={pinInfo.private}
             boardId={pinInfo.boardId}
             uid={pinInfo.uid}
+            user={user}
           />
         ))}
       </div>
@@ -28,6 +29,7 @@ function Pins({ pins, setPins }) {
 Pins.propTypes = {
   pins: PropTypes.array.isRequired,
   setPins: PropTypes.func.isRequired,
+  user: PropTypes.any
 };
 
 export default Pins;

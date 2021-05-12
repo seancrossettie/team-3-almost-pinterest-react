@@ -14,14 +14,12 @@ const PinForm = ({
   firebaseKey,
   user,
   boards,
-  pins
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    boardId: boardId || null,
     uid: user.uid || null
   });
 

@@ -15,7 +15,7 @@ function Pins({ pins, setPins, user }) {
             pinDescription={pinInfo.pinDescription}
             imgUrl={pinInfo.imgUrl}
             setPins={setPins}
-            private={pinInfo.private}
+            privatePin={pinInfo.privatePin}
             boardId={pinInfo.boardId}
             uid={pinInfo.uid}
             user={user}

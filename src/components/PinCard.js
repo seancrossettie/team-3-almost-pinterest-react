@@ -3,7 +3,7 @@ import {
   Button,
   Card,
   CardText,
-  CardTitle
+  CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PinForm from './PinForm';
@@ -16,7 +16,8 @@ const PinCard = ({
   imgUrl,
   uid,
   user,
-  setPins
+  setPins,
+  privatePin
 }) => {
   const [editing, setEditing] = useState(false);
   const handleClick = (type) => {
@@ -39,6 +40,7 @@ const PinCard = ({
         <CardTitle tag="h5">{pinTitle}</CardTitle>
         <img src={imgUrl} alt="Card image cap"/>
         <CardText>Description: {pinDescription}</CardText>
+         {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
         <Button color="danger" onClick={() => handleClick('delete')}>Delete Pin</Button>
         <Button color="info" onClick={() => handleClick('edit')}>
           {editing ? 'Close Form' : 'Edit Pin'}
@@ -52,6 +54,7 @@ const PinCard = ({
         imgUrl={imgUrl}
         pinDescription={pinDescription}
         uid={uid}
+        privatePin={privatePin}
         />}
       </Card>
     </div>
@@ -66,6 +69,7 @@ PinCard.propTypes = {
   setPins: PropTypes.func,
   uid: PropTypes.any,
   user: PropTypes.any,
+  privatePin: PropTypes.bool
 };
 
 export default PinCard;

@@ -16,14 +16,14 @@ export default function SingleBoard() {
   }, []);
 
   return (
-    <div>
+    <div className="m-4 board-card">
       <Button tag={Link} to='/boards' color="info">Go Back to All Boards</Button>
       <h1>Pin belongs to {board.boardTitle} board</h1>
       {pinBoard.map((pinBoardArray) => (
         <Card key={pinBoardArray.firebaseKey}>
           <CardBody>
             <h2>{pinBoardArray.pinTitle}</h2>
-            <img src={pinBoardArray.imgUrl}/>
+            <img width="100%" src={pinBoardArray.imgUrl}/>
             <p>{pinBoardArray.pinDescription}</p>
           </CardBody>
         </Card>

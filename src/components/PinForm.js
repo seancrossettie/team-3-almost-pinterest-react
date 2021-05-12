@@ -13,21 +13,23 @@ const PinForm = ({
   imgUrl,
   firebaseKey,
   uid,
-  user
+  user,
+  privatePin
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || uid
+    uid: user.uid || uid,
+    privatePin: privatePin || false
   });
 
   const handleInputChange = (e) => {
     setPin((prevState) => ({
       ...prevState,
       [e.target.name]:
-        e.target.name === 'grade' ? Number(e.target.value) : e.target.value,
+        e.target.name === 'privatePin' ? e.target.checked : e.target.value,
     }));
   };
 
@@ -91,6 +93,18 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input
+            type='checkbox'
+            name='privatePin'
+            id='privatePin'
+            checked={pin.privatePin}
+            onChange={handleInputChange}
+                />
+            Private ?
+        </Label>
+        </FormGroup>
         <Button type='submit'>Submit</Button>
       </Form>
       </Card>
@@ -107,7 +121,8 @@ PinForm.propTypes = {
   imgUrl: PropTypes.string,
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
-  user: PropTypes.any
+  user: PropTypes.any,
+  privatePin: PropTypes.bool
 };
 
 export default PinForm;

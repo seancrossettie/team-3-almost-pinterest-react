@@ -12,7 +12,7 @@ const getPins = (user) => new Promise((resolve, reject) => {
 
 // Get Public Pins
 const getPublicPins = () => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/pins.json?orderBy="private"&equalTo=false`)
+  axios.get(`${dbURL}/pins.json?orderBy="privatePin"&equalTo=false`)
     .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });

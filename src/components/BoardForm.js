@@ -12,7 +12,8 @@ const BoardForm = ({
   boardDescription,
   imgUrl,
   firebaseKey,
-  user
+  user,
+  privateBoard
 }) => {
   const [board, setBoard] = useState({
     boardTitle: boardTitle || '',
@@ -20,13 +21,14 @@ const BoardForm = ({
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
     uid: user.uid || null,
+    privateBoard: privateBoard || false
   });
 
   const handleInputChange = (e) => {
     setBoard((prevState) => ({
       ...prevState,
       [e.target.name]:
-        e.target.name === 'grade' ? Number(e.target.value) : e.target.value,
+        e.target.name === 'privateBoard' ? e.target.checked : e.target.value,
     }));
   };
 
@@ -89,7 +91,18 @@ const BoardForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
-
+        <FormGroup check>
+          <Label check>
+            <Input
+            type='checkbox'
+            name='privateBoard'
+            id='privateBoard'
+            checked={board.privateBoard}
+            onChange={handleInputChange}
+            />
+            Private ?
+        </Label>
+        </FormGroup>
         <Button type='submit'>Submit</Button>
       </Form>
       </Card>
@@ -106,7 +119,8 @@ BoardForm.propTypes = {
   imgUrl: PropTypes.string,
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
-  user: PropTypes.any
+  user: PropTypes.any,
+  privateBoard: PropTypes.bool
 };
 
 export default BoardForm;

@@ -13,7 +13,8 @@ const BoardCards = ({
   imgUrl,
   boardTitle,
   boardDescription,
-  setBoards
+  setBoards,
+  privateBoard
 }) => {
   const history = useHistory();
 
@@ -46,6 +47,7 @@ const BoardCards = ({
         <img width="100%" src={imgUrl} alt="Card image cap" />
         <CardBody>
           <CardText>{boardDescription}</CardText>
+          {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
           <CardLink href="#" onClick={() => handleCardButton('edit')}>Edit</CardLink>
           <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
           <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
@@ -61,7 +63,8 @@ BoardCards.propTypes = {
   boardTitle: PropTypes.string,
   boardDescription: PropTypes.string,
   setBoards: PropTypes.func.isRequired,
-  user: PropTypes.any
+  user: PropTypes.any,
+  privateBoard: PropTypes.bool
 };
 
 export default BoardCards;

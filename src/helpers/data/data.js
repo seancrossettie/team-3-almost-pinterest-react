@@ -14,7 +14,7 @@ const getBoards = (user) => new Promise((resolve, reject) => {
 
 // Get Public Boards
 const getPublicBoards = () => new Promise((resolve, reject) => {
-  axios.get(`${dbURL}/boards.json?orderBy="private"&equalTo=false`)
+  axios.get(`${dbURL}/boards.json?orderBy="privateBoard"&equalTo=false`)
     .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });

@@ -7,6 +7,7 @@ import NotFound from '../views/NotFound';
 import AddBoard from '../views/AddBoard';
 import AddPin from '../views/AddPins';
 import Pins from '../views/Pins';
+import SingleBoard from '../views/SingleBoard';
 
 // The PrivateRoute function is creating a private route and returing the specified route based on the props
 // We specify the specific props we want to use in the routeChecker and pass the rest with the spread
@@ -26,7 +27,7 @@ PrivateRoute.propTypes = {
 };
 
 export default function Routes({
-  user, boards, setBoards, setPins, pins
+  user, boards, setBoards, setPins, pins, setPinBoard
 }) {
   return (
     <Switch>
@@ -49,6 +50,10 @@ export default function Routes({
         component={() => <AddPin user={user} setPins={setPins} />}
         />
       <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
+      <PrivateRoute
+        path='/board/:id'
+        user={user}
+        component={() => <SingleBoard setPinBoard={setPinBoard}/>} />
     </Switch>
   );
 }
@@ -59,4 +64,5 @@ Routes.propTypes = {
   setPins: PropTypes.func.isRequired,
   pins: PropTypes.array.isRequired,
   boards: PropTypes.array,
+  setPinBoard: PropTypes.func
 };

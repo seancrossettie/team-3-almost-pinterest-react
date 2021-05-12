@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Card, CardText, CardBody, CardLink,
   CardTitle
@@ -14,19 +15,22 @@ const BoardCards = ({
   boardDescription,
   setBoards
 }) => {
+  const history = useHistory();
+
   const handleCardButton = (type) => {
     switch (type) {
       case 'edit':
         console.warn('edit this board');
         console.warn(user);
-        getBoards().then(setBoards);
+        getBoards(user).then(setBoards);
         break;
       case 'delete':
-        deleteBoard(firebaseKey)
+        deleteBoard(firebaseKey, user)
           .then(setBoards);
         break;
       case 'show-pins':
-        console.warn('showed pins for this this board');
+        // console.warn('showed pins for this this board');
+        history.push(`board/${firebaseKey}`);
         break;
       default:
         console.warn('No button clicked');

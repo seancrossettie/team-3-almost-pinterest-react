@@ -54,13 +54,6 @@ const PinForm = ({
     }
   };
 
-  const [boardId, setBoardId] = useState();
-
-  // const handleBoardAssign = (firebaseKey) => {
-  //   e.preventDefault();
-  //   if ()
-  // }
-
   return (
     <>
     <div className='pin-form'>

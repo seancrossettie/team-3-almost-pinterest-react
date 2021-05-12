@@ -26,19 +26,14 @@ function App() {
         };
         setUser(userObj);
         getPins(userObj).then(setPins);
+        getBoards(userObj).then(setBoards);
       } else if (user || user === null) {
         setUser(false);
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   getPins(user).then(setPins);
-  // }, []);
-
-  useEffect(() => {
-    getBoards().then(setBoards);
-  }, []);
+  console.warn(boards);
 
   return (
     <>

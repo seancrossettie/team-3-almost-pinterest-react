@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, Form, FormGroup, Label, Input, Card, Dropdown, DropdownToggle, DropdownMenu, DropdownItem
+  Button, Form, FormGroup, Label, Input, Card
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { createPin, updatePin } from '../helpers/data/pinData';
@@ -20,25 +20,19 @@ const PinForm = ({
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || null
+    uid: user.uid || null,
   });
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const handleInputChange = (e) => {
     setPin((prevState) => ({
       ...prevState,
-      [e.target.name]:
-        e.target.name === 'grade' ? Number(e.target.value) : e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pin.firebaseKey) {
-      console.warn(firebaseKey);
       updatePin(pin).then(setPins);
     } else {
       createPin(pin, user).then(setPins);
@@ -52,6 +46,11 @@ const PinForm = ({
         uid: null,
       });
     }
+  };
+
+  const handleBoardAssign = (e) => {
+    e.preventDefault();
+    console.warn(e.target.value);
   };
 
   return (
@@ -94,16 +93,21 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
-          <Dropdown isOpen={dropdownOpen} toggle={toggle} className='mb-3'>
-            <DropdownToggle caret>
-              Assign to a Board
-            </DropdownToggle>
-            <DropdownMenu>
-              {boards.map((boardObj) => (
-                <DropdownItem key={boardObj.firebaseKey}>{boardObj.boardTitle}</DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
+        <FormGroup>
+          <Label for="exampleSelect">Select a Board</Label>
+          <Input type="select" name="select">
+            <option value="">Select</option>
+            {boards.map((boardObj) => (
+                    <option
+                      value={boardObj.firebaseKey}
+                      key={boardObj.firebaseKey}
+                      onClick={handleBoardAssign}
+                    >
+                      {boardObj.boardTitle}
+                    </option>
+            ))}
+          </Input>
+        </FormGroup>
         <Button type='submit'>Submit</Button>
       </Form>
       </Card>

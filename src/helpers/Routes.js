@@ -24,7 +24,6 @@ PrivateRoute.propTypes = {
   user: PropTypes.any,
   component: PropTypes.any
 };
-
 export default function Routes({
   user, boards, setBoards, setPins, pins
 }) {

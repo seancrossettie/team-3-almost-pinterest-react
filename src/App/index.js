@@ -33,6 +33,8 @@ function App() {
     });
   }, []);
 
+  console.warn(boards);
+
   return (
     <>
      <Router>

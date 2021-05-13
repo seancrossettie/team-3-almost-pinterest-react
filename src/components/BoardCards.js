@@ -16,7 +16,6 @@ const BoardCards = ({
   boardDescription,
   setBoards,
   privateBoard,
-  setPins
 }) => {
   const history = useHistory();
 
@@ -28,12 +27,9 @@ const BoardCards = ({
         getBoards(user).then(setBoards);
         break;
       case 'delete':
-        deleteBoardPins(firebaseKey, user).then(setBoards, setPins);
-        // deleteBoard(firebaseKey, user)
-        //   .then(setBoards);
+        deleteBoardPins(firebaseKey, user).then(setBoards);
         break;
       case 'show-pins':
-        // console.warn('showed pins for this this board');
         history.push(`board/${firebaseKey}`);
         break;
       default:
@@ -70,7 +66,7 @@ BoardCards.propTypes = {
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any,
   privateBoard: PropTypes.bool,
-  setPins: PropTypes.func
+  setPins: PropTypes.func,
 };
 
 export default BoardCards;

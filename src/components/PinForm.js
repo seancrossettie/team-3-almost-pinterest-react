@@ -12,38 +12,35 @@ const PinForm = ({
   pinDescription,
   imgUrl,
   firebaseKey,
+  uid,
   user,
-  boards,
-  privatePin
+  privatePin,
+  boards
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || null,
+    uid: uid || null,
     privatePin: privatePin || false
   });
 
   const handleInputChange = (e) => {
     setPin((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
-      [e.target.name]: e.target.name === 'privatePin' ? e.target.checked : e.target.value,
+      [e.target.name]:
+        e.target.name === 'privatePin' ? e.target.checked : e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pin.firebaseKey) {
-      updatePin(pin).then(setPins);
+      updatePin(pin, user).then(setPins);
     } else {
       createPin(pin, user).then(setPins);
     }
-  };
-
-  const handleBoardAssign = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -63,6 +60,7 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
+
         <FormGroup>
           <Label for="pinDescription">Description:</Label>
           <Input
@@ -74,6 +72,7 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
+
         <FormGroup>
           <Label for="image">Pin Image:</Label>
           <Input
@@ -87,7 +86,7 @@ const PinForm = ({
         </FormGroup>
         <FormGroup>
           <Label for="exampleSelect">Select a Board</Label>
-          <Input type="select" name="select" onClick={handleBoardAssign}>
+          <Input type="select" name="select" onClick={handleInputChange}>
             <option value="">Select</option>
             {boards.map((boardObj) => (
                     <option
@@ -99,6 +98,7 @@ const PinForm = ({
             ))}
           </Input>
           </FormGroup>
+
         <FormGroup check>
           <Label check>
             <Input
@@ -128,9 +128,8 @@ PinForm.propTypes = {
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
   user: PropTypes.any,
-  boards: PropTypes.array.isRequired,
-  pins: PropTypes.array,
-  privatePin: PropTypes.bool
+  privatePin: PropTypes.bool,
+  boards: PropTypes.array
 };
 
 export default PinForm;

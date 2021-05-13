@@ -26,7 +26,7 @@ PrivateRoute.propTypes = {
   component: PropTypes.any
 };
 export default function Routes({
-  user, boards, setBoards, setPins, pins
+  user, boards, setBoards, setPins, pins, setPinBoard
 }) {
   return (
     <Switch>
@@ -61,5 +61,6 @@ Routes.propTypes = {
   setBoards: PropTypes.func.isRequired,
   setPins: PropTypes.func.isRequired,
   pins: PropTypes.array.isRequired,
-  boards: PropTypes.array.isRequired
+  boards: PropTypes.array.isRequired,
+  setPinBoard: PropTypes.func
 };

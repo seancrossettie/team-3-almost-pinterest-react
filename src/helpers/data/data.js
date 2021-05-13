@@ -12,14 +12,28 @@ const getBoards = (user) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Get Public Boards
+const getPublicBoards = () => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/boards.json?orderBy="privateBoard"&equalTo=false`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
+});
+
+// Get Single Board
+const getSingleBoard = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/boards/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 // Create Boards
-const createBoard = (obj) => new Promise((resolve, reject) => {
+const createBoard = (obj, user) => new Promise((resolve, reject) => {
   axios.post(`${dbURL}/boards.json`, obj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbURL}/boards/${response.data.name}.json`, body)
         .then(() => {
-          getBoards((resp) => resolve(resp));
+          getBoards(user).then((resp) => resolve(resp));
         });
     })
     .catch((error) => reject(error));
@@ -32,14 +46,12 @@ const deleteBoard = (firebaseKey, user) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateBoard = (obj) => new Promise((resolve, reject) => {
+const updateBoard = (obj, user) => new Promise((resolve, reject) => {
   axios.patch(`${dbURL}/boards/${obj.firebaseKey}.json`, obj)
-    .then(() => {
-      getBoards((resp) => resolve(resp));
-    })
+    .then(() => getBoards(user).then((resp) => resolve(resp)))
     .catch((error) => reject(error));
 });
 
 export {
-  getBoards, createBoard, deleteBoard, updateBoard
+  getBoards, getSingleBoard, createBoard, deleteBoard, updateBoard, getPublicBoards
 };

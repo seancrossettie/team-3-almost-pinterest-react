@@ -12,7 +12,6 @@ const BoardForm = ({
   boardDescription,
   imgUrl,
   firebaseKey,
-  uid,
   user,
   privateBoard,
 }) => {
@@ -21,7 +20,7 @@ const BoardForm = ({
     boardDescription: boardDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || uid,
+    uid: user.uid || null,
     privateBoard: privateBoard || false
   });
 
@@ -36,7 +35,6 @@ const BoardForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (board.firebaseKey) {
-      console.warn(firebaseKey);
       updateBoard(board).then(setBoards);
     } else {
       createBoard(board, user).then(setBoards);

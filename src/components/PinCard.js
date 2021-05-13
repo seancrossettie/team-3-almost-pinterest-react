@@ -3,11 +3,12 @@ import {
   Card,
   CardText,
   CardTitle,
-  Button
+  CardBody,
+  CardLink
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import PinForm from './PinForm';
 import { deletePin } from '../helpers/data/pinData';
+import PinForm from './PinForm';
 
 const PinCard = ({
   firebaseKey,
@@ -17,7 +18,8 @@ const PinCard = ({
   uid,
   user,
   setPins,
-  privatePin
+  privatePin,
+  boards
 }) => {
   const [editing, setEditing] = useState(false);
   const handleClick = (type) => {
@@ -36,27 +38,32 @@ const PinCard = ({
 
   return (
     <div>
-      <Card className="m-4 board-card" body>
-        <CardTitle tag="h5">{pinTitle}</CardTitle>
-        <img src={imgUrl} alt="Card image cap"/>
-        <CardText>Description: {pinDescription}</CardText>
-         {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
-        <Button color="danger" onClick={() => handleClick('delete')}>Delete Pin</Button>
-        <Button color="info" onClick={() => handleClick('edit')}>
-          {editing ? 'Close Form' : 'Edit Pin'}
-        </Button>
-        {
-        editing && <PinForm
-        formTitle='Edit Pin'
-        setPins={setPins}
-        firebaseKey={firebaseKey}
-        pinTitle={pinTitle}
-        imgUrl={imgUrl}
-        pinDescription={pinDescription}
-        uid={uid}
-        user={user}
-        privatePin={privatePin}
-        />}
+      <Card className="m-4 board-card" key={firebaseKey}>
+        <CardBody>
+          <CardTitle tag="h5">{pinTitle}</CardTitle>
+        </CardBody>
+        <img width="100%" src={imgUrl} alt="Card image cap" />
+        <CardBody>
+          <CardText>{pinDescription}</CardText>
+          {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
+          <div className='card-links'>
+            <CardLink className="edit-link" href="#" onClick={() => handleClick('edit')}>Edit</CardLink>
+            <CardLink className="delete-link" href="#" onClick={() => handleClick('delete')}>Delete</CardLink>
+          </div>
+          {
+          editing && <PinForm
+            formTitle='Edit Pin'
+            setPins={setPins}
+            firebaseKey={firebaseKey}
+            pinTitle={pinTitle}
+            imgUrl={imgUrl}
+            pinDescription={pinDescription}
+            uid={uid}
+            privatePin={privatePin}
+            boards={boards}
+            user={user}
+          />}
+        </CardBody>
       </Card>
     </div>
   );
@@ -70,7 +77,8 @@ PinCard.propTypes = {
   setPins: PropTypes.func,
   uid: PropTypes.any,
   user: PropTypes.any,
-  privatePin: PropTypes.bool
+  privatePin: PropTypes.bool,
+  boards: PropTypes.array,
 };
 
 export default PinCard;

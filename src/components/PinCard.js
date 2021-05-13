@@ -19,6 +19,7 @@ const PinCard = ({
   user,
   setPins,
   privatePin,
+  boardId,
   boards
 }) => {
   const [editing, setEditing] = useState(false);
@@ -59,6 +60,7 @@ const PinCard = ({
             imgUrl={imgUrl}
             pinDescription={pinDescription}
             uid={uid}
+            boardId={boardId}
             privatePin={privatePin}
             boards={boards}
             user={user}
@@ -79,6 +81,7 @@ PinCard.propTypes = {
   user: PropTypes.any,
   privatePin: PropTypes.bool,
   boards: PropTypes.array,
+  boardId: PropTypes.string
 };
 
 export default PinCard;

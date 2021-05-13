@@ -35,7 +35,7 @@ const BoardForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (board.firebaseKey) {
-      updateBoard(board).then(setBoards);
+      updateBoard(board, user).then(setBoards);
     } else {
       createBoard(board, user).then(setBoards);
 

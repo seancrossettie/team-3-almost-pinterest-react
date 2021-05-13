@@ -12,7 +12,6 @@ const PinForm = ({
   pinDescription,
   imgUrl,
   firebaseKey,
-  uid,
   user,
   privatePin,
   boards
@@ -22,7 +21,7 @@ const PinForm = ({
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: uid || null,
+    uid: user.uid || null,
     privatePin: privatePin || false
   });
 

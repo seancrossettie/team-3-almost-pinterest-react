@@ -14,6 +14,7 @@ const PinForm = ({
   firebaseKey,
   user,
   privatePin,
+  boardId,
   boards
 }) => {
   const [pin, setPin] = useState({
@@ -22,6 +23,7 @@ const PinForm = ({
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
     uid: user.uid || null,
+    boardId: boardId || null,
     privatePin: privatePin || false
   });
 
@@ -85,7 +87,7 @@ const PinForm = ({
         </FormGroup>
         <FormGroup>
           <Label for="exampleSelect">Select a Board</Label>
-          <Input type="select" name="select" onClick={handleInputChange}>
+          <Input type="select" name="boardId" onChange={handleInputChange}>
             <option value="">Select</option>
             {boards.map((boardObj) => (
                     <option
@@ -128,7 +130,8 @@ PinForm.propTypes = {
   uid: PropTypes.string,
   user: PropTypes.any,
   privatePin: PropTypes.bool,
-  boards: PropTypes.array
+  boards: PropTypes.array,
+  boardId: PropTypes.string,
 };
 
 export default PinForm;

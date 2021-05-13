@@ -33,10 +33,9 @@ export default function Routes({
       <Route exact path='/' component={() => <Home user={user}/>} />
       <Route exact path='/not-found' component={NotFound} />
       <PrivateRoute
-          exact
-          user={user}
-          path='/pins'
-          component={() => <Pins user={user} pins={pins} setPins={setPins} />}
+        user={user}
+        path='/pins'
+        component={() => <Pins user={user} pins={pins} boards={boards} setPins={setPins} />}
         />
       <PrivateRoute
         user={user}
@@ -46,13 +45,13 @@ export default function Routes({
       <PrivateRoute
         user={user}
         path='/add-pins'
-        component={() => <AddPin user={user} setPins={setPins} />}
+        component={() => <AddPin user={user} boards={boards} pins={pins} setPins={setPins} />}
         />
-      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
-      <PrivateRoute
+        <PrivateRoute
         path='/board/:id'
         user={user}
         component={() => <SingleBoard setPinBoard={setPinBoard}/>} />
+      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
     </Switch>
   );
 }
@@ -62,6 +61,6 @@ Routes.propTypes = {
   setBoards: PropTypes.func.isRequired,
   setPins: PropTypes.func.isRequired,
   pins: PropTypes.array.isRequired,
-  boards: PropTypes.array,
+  boards: PropTypes.array.isRequired,
   setPinBoard: PropTypes.func
 };

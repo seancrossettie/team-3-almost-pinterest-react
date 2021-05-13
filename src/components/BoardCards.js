@@ -28,7 +28,7 @@ const BoardCards = ({
         getBoards(user).then(setBoards);
         break;
       case 'delete':
-        deleteBoardPins(firebaseKey, user).then([setBoards, setPins]);
+        deleteBoardPins(firebaseKey, user).then(setBoards, setPins);
         // deleteBoard(firebaseKey, user)
         //   .then(setBoards);
         break;

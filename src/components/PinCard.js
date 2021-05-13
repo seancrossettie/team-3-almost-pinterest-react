@@ -7,8 +7,8 @@ import {
   CardTitle
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import PinForm from './PinForm';
 import { deletePin } from '../helpers/data/pinData';
+import PinForm from './PinForm';
 
 const PinCard = ({
   firebaseKey,
@@ -18,7 +18,8 @@ const PinCard = ({
   uid,
   user,
   setPins,
-  privatePin
+  privatePin,
+  boards
 }) => {
   const [editing, setEditing] = useState(false);
   const handleClick = (type) => {
@@ -51,14 +52,16 @@ const PinCard = ({
           </div>
           {
           editing && <PinForm
-          formTitle='Edit Pin'
-          setPins={setPins}
-          firebaseKey={firebaseKey}
-          pinTitle={pinTitle}
-          imgUrl={imgUrl}
-          pinDescription={pinDescription}
-          uid={uid}
-          privatePin={privatePin}
+            formTitle='Edit Pin'
+            setPins={setPins}
+            firebaseKey={firebaseKey}
+            pinTitle={pinTitle}
+            imgUrl={imgUrl}
+            pinDescription={pinDescription}
+            uid={uid}
+            privatePin={privatePin}
+            boards={boards}
+            user={user}
           />}
         </CardBody>
       </Card>
@@ -74,7 +77,8 @@ PinCard.propTypes = {
   setPins: PropTypes.func,
   uid: PropTypes.any,
   user: PropTypes.any,
-  privatePin: PropTypes.bool
+  privatePin: PropTypes.bool,
+  boards: PropTypes.array,
 };
 
 export default PinCard;

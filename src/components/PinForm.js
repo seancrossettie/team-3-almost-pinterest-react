@@ -14,14 +14,15 @@ const PinForm = ({
   firebaseKey,
   uid,
   user,
-  privatePin
+  privatePin,
+  boards
 }) => {
   const [pin, setPin] = useState({
     pinTitle: pinTitle || '',
     pinDescription: pinDescription || '',
     imgUrl: imgUrl || '',
     firebaseKey: firebaseKey || null,
-    uid: user.uid || uid,
+    uid: uid || null,
     privatePin: privatePin || false
   });
 
@@ -36,19 +37,9 @@ const PinForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pin.firebaseKey) {
-      console.warn(firebaseKey);
-      updatePin(pin).then(setPins);
+      updatePin(pin, user).then(setPins);
     } else {
       createPin(pin, user).then(setPins);
-
-      // clear inputs
-      setPin({
-        pinTitle: '',
-        pinDescription: '',
-        imgUrl: '',
-        firebaseKey: null,
-        uid: null,
-      });
     }
   };
 
@@ -93,6 +84,21 @@ const PinForm = ({
             onChange={handleInputChange}
           />
         </FormGroup>
+        <FormGroup>
+          <Label for="exampleSelect">Select a Board</Label>
+          <Input type="select" name="select" onClick={handleInputChange}>
+            <option value="">Select</option>
+            {boards.map((boardObj) => (
+                    <option
+                      value={boardObj.firebaseKey}
+                      key={boardObj.firebaseKey}
+                    >
+                      {boardObj.boardTitle}
+                    </option>
+            ))}
+          </Input>
+          </FormGroup>
+
         <FormGroup check>
           <Label check>
             <Input
@@ -122,7 +128,8 @@ PinForm.propTypes = {
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
   user: PropTypes.any,
-  privatePin: PropTypes.bool
+  privatePin: PropTypes.bool,
+  boards: PropTypes.array
 };
 
 export default PinForm;

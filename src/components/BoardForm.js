@@ -3,6 +3,7 @@ import {
   Button, Form, FormGroup, Label, Input, Card
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { createBoard, updateBoard } from '../helpers/data/data';
 
 const BoardForm = ({
@@ -13,7 +14,7 @@ const BoardForm = ({
   imgUrl,
   firebaseKey,
   user,
-  privateBoard
+  privateBoard,
 }) => {
   const [board, setBoard] = useState({
     boardTitle: boardTitle || '',
@@ -32,12 +33,15 @@ const BoardForm = ({
     }));
   };
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (board.firebaseKey) {
       updateBoard(board).then(setBoards);
     } else {
       createBoard(board, user).then(setBoards);
+      history.push('/boards');
 
       // clear inputs
       setBoard({

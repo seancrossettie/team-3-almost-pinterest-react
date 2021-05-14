@@ -15,7 +15,7 @@ const BoardCards = ({
   boardTitle,
   boardDescription,
   setBoards,
-  privateBoard,
+  privateBoard
 }) => {
   const history = useHistory();
 
@@ -65,8 +65,7 @@ BoardCards.propTypes = {
   boardDescription: PropTypes.string,
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any,
-  privateBoard: PropTypes.bool,
-  setPins: PropTypes.func,
+  privateBoard: PropTypes.bool
 };
 
 export default BoardCards;

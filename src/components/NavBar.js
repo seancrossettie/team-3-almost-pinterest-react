@@ -10,16 +10,21 @@ import {
   Button
 } from 'reactstrap';
 import { signOutUser } from '../helpers/auth';
+import { getPins } from '../helpers/data/pinData';
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, setPins }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    getPins(user).then(setPins);
+  };
 
   const toggle = () => setIsOpen(!isOpen);
 
   const authenticated = () => (
     <>
             <NavItem>
-              <Link className="nav-link" to="/pins">Pins</Link>
+              <Link className="nav-link" to="/pins" onClick={handleClick}>Pins</Link>
             </NavItem>
             <NavItem>
               <Link className="nav-link" to="/boards">Boards</Link>
@@ -60,7 +65,8 @@ const NavBar = ({ user }) => {
 };
 
 NavBar.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  setPins: PropTypes.func
 };
 
 export default NavBar;

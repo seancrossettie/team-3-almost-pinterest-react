@@ -36,7 +36,7 @@ function App() {
   return (
     <>
      <Router>
-      <NavBar user={user} />
+      <NavBar user={user} setPins={setPins}/>
       <Routes
       user={user}
       pins={pins}

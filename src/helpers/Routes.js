@@ -50,7 +50,7 @@ export default function Routes({
         path='/board/:id'
         user={user}
         component={() => <SingleBoard setPinBoard={setPinBoard}/>} />
-      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
+      <Route exact path='/boards/' component={() => <BoardView boards={boards} setBoards={setBoards} user={user}/>}/>
       <Route exact path='/*' component={NotFound} />
     </Switch>
   );
@@ -62,5 +62,5 @@ Routes.propTypes = {
   setPins: PropTypes.func.isRequired,
   pins: PropTypes.array.isRequired,
   boards: PropTypes.array.isRequired,
-  setPinBoard: PropTypes.func
+  setPinBoard: PropTypes.func,
 };

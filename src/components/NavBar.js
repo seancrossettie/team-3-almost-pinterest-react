@@ -11,15 +11,16 @@ import {
 } from 'reactstrap';
 import { signOutUser } from '../helpers/auth';
 import { getPins } from '../helpers/data/pinData';
+// import { getPins } from '../helpers/data/pinData';
 
 const NavBar = ({ user, setPins }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggle = () => setIsOpen(!isOpen);
+
   const handleClick = () => {
     getPins(user).then(setPins);
   };
-
-  const toggle = () => setIsOpen(!isOpen);
 
   const authenticated = () => (
     <>

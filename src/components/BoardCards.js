@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Card, CardText, CardBody, CardLink,
-  CardTitle
+  CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { getBoards } from '../helpers/data/data';
 import deleteBoardPins from '../helpers/data/pinBoardData';
 import { getPins } from '../helpers/data/pinData';
+import BoardForm from './BoardForm';
 
 const BoardCards = ({
   user,
@@ -17,16 +17,17 @@ const BoardCards = ({
   boardDescription,
   setBoards,
   privateBoard,
-  setPins
+  setPins,
+  uid
 }) => {
+  const [editing, setEditing] = useState(false);
   const history = useHistory();
 
   const handleCardButton = (type) => {
     switch (type) {
       case 'edit':
-        console.warn('edit this board');
         console.warn(user);
-        getBoards(user).then(setBoards);
+        setEditing((prevState) => !prevState);
         break;
       case 'delete':
         deleteBoardPins(firebaseKey, user)
@@ -52,11 +53,24 @@ const BoardCards = ({
         <CardBody>
           <CardText>{boardDescription}</CardText>
           {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
-          <div className='card-links'>
-            <CardLink className="edit-link" href="#" onClick={() => handleCardButton('edit')}>Edit</CardLink>
-            <CardLink className="delete-link" href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
-            <CardLink className="pins-link" href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
-          </div>
+          <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
+          <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
+          <CardLink href="#" onClick={() => handleCardButton('edit')}>
+          {editing ? 'Close Form' : 'Edit Board'}
+          </CardLink>
+          {
+            editing && <BoardForm
+            formTitle='Edit Board'
+            setBoards={setBoards}
+            firebaseKey={firebaseKey}
+            imgUrl={imgUrl}
+            boardTitle={boardTitle}
+            boardDescription={boardDescription}
+            uid={uid}
+            user={user}
+            privateBoard={privateBoard}
+            />
+          }
         </CardBody>
       </Card>
     </div>
@@ -71,7 +85,8 @@ BoardCards.propTypes = {
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any,
   privateBoard: PropTypes.bool,
-  setPins: PropTypes.func
+  setPins: PropTypes.func,
+  uid: PropTypes.any,
 };
 
 export default BoardCards;

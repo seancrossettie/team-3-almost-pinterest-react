@@ -38,6 +38,9 @@ const BoardCards = ({
       case 'show-pins':
         history.push(`board/${firebaseKey}`);
         break;
+      case 'share':
+        history.push(`board/public/${firebaseKey}`);
+        break;
       default:
         console.warn('No button clicked');
     }
@@ -55,6 +58,7 @@ const BoardCards = ({
           {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
           <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
           <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
+          {!privateBoard && <CardLink href="#" onClick={() => handleCardButton('share')}>Share</CardLink>}
           <CardLink href="#" onClick={() => handleCardButton('edit')}>
           {editing ? 'Close Form' : 'Edit Board'}
           </CardLink>

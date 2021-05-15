@@ -12,6 +12,7 @@ body {
   align-items: center;
   height: 70vh;
   text-align: center;
+  flex-wrap: wrap;
 
   h1 {
     color: $pinRed;
@@ -31,4 +32,9 @@ body {
 
 .pinBoard-container {
   text-align: center;
+}
+
+.publicCard {
+  display: flex;
+  justify-content: center;
 }

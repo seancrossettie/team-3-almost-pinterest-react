@@ -13,7 +13,7 @@ const BoardForm = ({
   imgUrl,
   firebaseKey,
   user,
-  privateBoard
+  privateBoard,
 }) => {
   const [board, setBoard] = useState({
     boardTitle: boardTitle || '',
@@ -35,7 +35,7 @@ const BoardForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (board.firebaseKey) {
-      updateBoard(board).then(setBoards);
+      updateBoard(board, user).then(setBoards);
     } else {
       createBoard(board, user).then(setBoards);
 
@@ -51,7 +51,6 @@ const BoardForm = ({
   };
 
   return (
-    <>
     <div className='board-form'>
     <Card body>
       <Form id='addBoardForm' autoComplete='off' onSubmit={handleSubmit}>
@@ -107,7 +106,6 @@ const BoardForm = ({
       </Form>
       </Card>
     </div>
-    </>
   );
 };
 
@@ -120,7 +118,9 @@ BoardForm.propTypes = {
   firebaseKey: PropTypes.string,
   uid: PropTypes.string,
   user: PropTypes.any,
-  privateBoard: PropTypes.bool
+  privateBoard: PropTypes.bool,
+  className: PropTypes.string
+
 };
 
 export default BoardForm;

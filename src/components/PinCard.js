@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {
   Card,
   CardText,
+  CardTitle,
   CardBody,
-  CardLink,
-  CardTitle
+  CardLink
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { deletePin } from '../helpers/data/pinData';

@@ -53,7 +53,7 @@ export default function Routes({
       <PrivateRoute
         user={user}
         path='/boards'
-        component={() => <BoardView boards={boards} setBoards={setBoards} user={user} />} />
+        component={() => <BoardView boards={boards} setBoards={setBoards} user={user} setPins={setPins}/>} />
       <Route path='*' component={NotFound} />
     </Switch>
   );

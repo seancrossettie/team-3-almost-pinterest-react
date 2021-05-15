@@ -7,6 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import { getBoards } from '../helpers/data/data';
 import deleteBoardPins from '../helpers/data/pinBoardData';
+import { getPins } from '../helpers/data/pinData';
 
 const BoardCards = ({
   user,
@@ -15,7 +16,8 @@ const BoardCards = ({
   boardTitle,
   boardDescription,
   setBoards,
-  privateBoard
+  privateBoard,
+  setPins
 }) => {
   const history = useHistory();
 
@@ -27,7 +29,10 @@ const BoardCards = ({
         getBoards(user).then(setBoards);
         break;
       case 'delete':
-        deleteBoardPins(firebaseKey, user).then(setBoards);
+        deleteBoardPins(firebaseKey, user)
+          .then(setBoards)
+          .then(() => getPins(user))
+          .then(setPins);
         break;
       case 'show-pins':
         history.push(`board/${firebaseKey}`);
@@ -65,7 +70,8 @@ BoardCards.propTypes = {
   boardDescription: PropTypes.string,
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any,
-  privateBoard: PropTypes.bool
+  privateBoard: PropTypes.bool,
+  setPins: PropTypes.func
 };
 
 export default BoardCards;

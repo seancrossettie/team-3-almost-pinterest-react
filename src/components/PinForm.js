@@ -3,6 +3,7 @@ import {
   Button, Form, FormGroup, Label, Input, Card
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { createPin, updatePin } from '../helpers/data/pinData';
 
 const PinForm = ({
@@ -35,12 +36,15 @@ const PinForm = ({
     }));
   };
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pin.firebaseKey) {
       updatePin(pin, user).then(setPins);
     } else {
       createPin(pin, user).then(setPins);
+      history.push('/pins');
     }
   };
 

@@ -5,7 +5,8 @@ import {
   CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { deleteBoard } from '../helpers/data/data';
+import deleteBoardPins from '../helpers/data/pinBoardData';
+import { getPins } from '../helpers/data/pinData';
 import BoardForm from './BoardForm';
 
 const BoardCards = ({
@@ -16,6 +17,7 @@ const BoardCards = ({
   boardDescription,
   setBoards,
   privateBoard,
+  setPins,
   uid
 }) => {
   const [editing, setEditing] = useState(false);
@@ -28,11 +30,12 @@ const BoardCards = ({
         setEditing((prevState) => !prevState);
         break;
       case 'delete':
-        deleteBoard(firebaseKey, user)
-          .then(setBoards);
+        deleteBoardPins(firebaseKey, user)
+          .then(setBoards)
+          .then(() => getPins(user))
+          .then(setPins);
         break;
       case 'show-pins':
-        // console.warn('showed pins for this this board');
         history.push(`board/${firebaseKey}`);
         break;
       default:
@@ -82,6 +85,7 @@ BoardCards.propTypes = {
   setBoards: PropTypes.func.isRequired,
   user: PropTypes.any,
   privateBoard: PropTypes.bool,
+  setPins: PropTypes.func,
   uid: PropTypes.any,
 };
 

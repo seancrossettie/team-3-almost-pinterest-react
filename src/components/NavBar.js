@@ -10,6 +10,7 @@ import {
   Button
 } from 'reactstrap';
 import { signOutUser } from '../helpers/auth';
+// import { getPins } from '../helpers/data/pinData';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);

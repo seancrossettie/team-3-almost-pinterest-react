@@ -1,37 +1,30 @@
-# SR React Template
+# Almost Pinterest - React
+The purpose of this project is to recreate Almost Pinterest using react. This is a full CRUD application that the user can authenticate and create/read/update/delete boards and pins.
 
-**Use this template to get up and running quickly on projects.**
+## Features
+1. The user can create new Board
+2. The user can create new Pin and assign a specific Board
+3. The user can read the existing data and see the boards and pins.
+4. The user can update the boards and pins. (Also user can make private boards/pins)
+5. The user can delete the board and associated pins with the board.
 
-To run, install npm
+## Deployed Netlify App
 
-``
-npm install
-``
+## Screenshot of the Project
+<p float="left">When the user is not authenticated
+  <img src="./src/assets/notloggedin.png" width="800">
+</p>
+<p float="left">When the user is authenticated
+  <img src="./src/assets/authenticated.png" width="800">
+</p>
 
-Then, install react-router-dom
 
-``
-npm i react-router-dom
-``
+## ERD
+https://dbdiagram.io/d/6099c9e9b29a09603d14435c
 
-## Packages
-Included in this template are the following packages/frameworks/CDNs
-- Material UI Core
+## Wireframe
+https://xd.adobe.com/view/712a0f65-47da-4016-aaac-15ec98d2b648-2479/?hints=off
 
-``
-npm install @material-ui/core
-``
-- Material UI Icons
 
-``
-npm install @material-ui/icons
-``
-- Moment.js
-
-``
-  npm install moment --save
-``
-- Bootstrap (included)
-- Firebase Auth (included)
-
-**Before using this template, please update the .env file with you firbase info if you plan on using firebase for your project; otherwise, delete all firbase boilerplate related code to remove errors.**
+## Contributors
+@seancrossettie @Mitchell-Crumbley @robertncole1 @chiestroud

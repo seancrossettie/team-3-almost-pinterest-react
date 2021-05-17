@@ -26,15 +26,15 @@ PrivateRoute.propTypes = {
   component: PropTypes.any
 };
 export default function Routes({
-  user, boards, setBoards, setPins, pins, setPinBoard
+  user, boards, setBoards, setPins, pins, setPinBoard, setPublicPins, publicPins
 }) {
   return (
     <Switch>
-      <Route exact path='/' component={() => <Home user={user}/>} />
+      <Route exact path='/' component={() => <Home user={user} setPins={setPins} setPublicPins={setPublicPins} publicPins={publicPins} boards={boards}/>} />
       <PrivateRoute
         user={user}
         path='/pins'
-        component={() => <Pins user={user} pins={pins} boards={boards} setPins={setPins} />}
+        component={() => <Pins user={user} pins={pins} boards={boards} setPins={setPins} setPublicPins={setPublicPins}/>}
         />
       <PrivateRoute
         user={user}
@@ -45,7 +45,11 @@ export default function Routes({
         user={user}
         path='/add-pins'
         component={() => <AddPin user={user} boards={boards} pins={pins} setPins={setPins} />}
-        />
+      />
+      <Route
+        path='/board/public/:id'
+        component={() => <SingleBoard setPinboard={setPinBoard} />}
+      />
         <PrivateRoute
         path='/board/:id'
         user={user}
@@ -66,4 +70,6 @@ Routes.propTypes = {
   pins: PropTypes.array.isRequired,
   boards: PropTypes.array.isRequired,
   setPinBoard: PropTypes.func,
+  setPublicPins: PropTypes.func,
+  publicPins: PropTypes.array
 };

@@ -28,11 +28,18 @@ function App() {
         setUser(userObj);
         getPins(userObj).then(setPins);
         getBoards(userObj).then(setBoards);
-        getUsers().then((data) => createUser(data));
       } else if (user || user === null) {
         setUser(false);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      getUsers().then((data) => {
+        createUser(data);
+      });
+    }
   }, []);
 
   return (

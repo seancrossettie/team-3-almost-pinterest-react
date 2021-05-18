@@ -12,12 +12,12 @@ const getUsers = () => new Promise((resolve, reject) => {
 const createUser = (user) => new Promise((resolve, reject) => {
   axios.get(`${dbURL}/users.json?orderBy="uid"&equalTo="${user.uid}"`)
     .then((response) => {
-      if (!Object.values(response.data).length) {
+      if (!Object.values(response.data).uid) {
         const userObj = {
           uid: user.uid,
           displayName: user.displayName,
           image: user.photoURL,
-          email: user.email
+          email: user.email,
         };
         axios.post(`${dbURL}/users.json`, userObj)
           .then((userResponse) => {

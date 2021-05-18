@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card, CardImg, CardText, CardBody,
+  Card, CardImg, CardText, CardImgOverlay,
   CardTitle, Button
 } from 'reactstrap';
 // import { createPin, getPublicPins } from '../helpers/data/pinData';
@@ -31,11 +31,15 @@ export default function PublicPinCard({
   };
 
   return (
-    <div className="m-4 board-card">
-      <Card key={firebaseKey} id={firebaseKey}>
-        <CardImg top width="100%" src={imgUrl} alt={pinTitle} />
-        <CardBody>
-          <CardTitle tag="h5">{pinTitle}</CardTitle>
+    <div>
+      <Card className="m-4 board-card" key={firebaseKey} id={firebaseKey} inverse>
+      <div className="img-div">
+        <CardImg className="card-img" width="100%" src={imgUrl} alt={pinTitle} />
+      </div>
+      <div className="overlay"></div>
+      <CardImgOverlay>
+      <div className="card-content">
+      <CardTitle tag="h5">{pinTitle}</CardTitle>
           <CardText>{pinDescription}</CardText>
           <Button color='danger' onClick={handleClick}>Pin This Public Pin</Button>
           {showForm && <PublicForm
@@ -51,8 +55,9 @@ export default function PublicPinCard({
             boards={boards}
             user={user}
           />}
-        </CardBody>
-      </Card>
+        </div>
+      </CardImgOverlay>
+    </Card>
     </div>
   );
 }

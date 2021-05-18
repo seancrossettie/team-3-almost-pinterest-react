@@ -50,7 +50,8 @@ const BoardCards = ({
     <div>
       {
       editing ? <>
-          <CardLink href="#" onClick={() => handleCardButton('edit')}>
+      <Card className="m-4 board-card">
+          <CardLink className="form-close" href="#" onClick={() => handleCardButton('edit')}>
             {editing ? 'Close Form' : 'Edit Board'}
           </CardLink>
           <BoardForm className='edit-form'
@@ -64,6 +65,7 @@ const BoardCards = ({
             user={user}
             privateBoard={privateBoard}
           />
+        </Card>
         </>
         : <Card className="m-4 board-card" inverse key={firebaseKey}>
             <div className="img-div">

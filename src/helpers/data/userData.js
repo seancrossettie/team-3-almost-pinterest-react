@@ -17,7 +17,7 @@ const createUser = (user) => new Promise((resolve, reject) => {
           uid: user.uid,
           displayName: user.displayName,
           image: user.photoURL,
-          email: user.email,
+          email: user.email
         };
         axios.post(`${dbURL}/users.json`, userObj)
           .then((userResponse) => {

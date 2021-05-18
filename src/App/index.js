@@ -7,6 +7,7 @@ import Routes from '../helpers/Routes';
 import NavBar from '../components/NavBar';
 import { getPins } from '../helpers/data/pinData';
 import { getBoards } from '../helpers/data/data';
+import { createUser, getUsers } from '../helpers/data/userData';
 
 function App() {
   // This hook maintains state of user in app, the absense of which resulting in the state of null
@@ -27,6 +28,7 @@ function App() {
         setUser(userObj);
         getPins(userObj).then(setPins);
         getBoards(userObj).then(setBoards);
+        getUsers().then((data) => createUser(data));
       } else if (user || user === null) {
         setUser(false);
       }

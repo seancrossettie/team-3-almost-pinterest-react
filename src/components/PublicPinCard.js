@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 // import { createPin, getPublicPins } from '../helpers/data/pinData';
 import PublicForm from './PublicForm';
+import ModalLink from './ModalLink';
 
 export default function PublicPinCard({
   imgUrl,
@@ -22,12 +23,7 @@ export default function PublicPinCard({
   const [showForm, setShowForm] = useState(false);
 
   const handleClick = () => {
-    if (user) {
-      setShowForm((prevState) => !(prevState));
-    } else {
-      // eslint-disable-next-line no-alert
-      window.alert('Please Sign In');
-    }
+    setShowForm((prevState) => !(prevState));
   };
 
   return (
@@ -37,7 +33,8 @@ export default function PublicPinCard({
         <CardBody>
           <CardTitle tag="h5">{pinTitle}</CardTitle>
           <CardText>{pinDescription}</CardText>
-          <Button color='danger' onClick={handleClick}>Pin This Public Pin</Button>
+          {user ? <Button color='danger' onClick={handleClick}>Pin This Public Pin</Button>
+            : <ModalLink />}
           {showForm && <PublicForm
             formTitle='Pin This?'
             setPins={setPins}

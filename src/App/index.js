@@ -22,7 +22,7 @@ function App() {
           fullName: authed.displayName,
           profileImage: authed.photoURL,
           uid: authed.uid,
-          user: authed.email.split('@')[0]
+          user: authed.email
         };
         setUser(userObj);
         getPins(userObj).then(setPins);

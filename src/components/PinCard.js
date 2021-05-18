@@ -40,37 +40,46 @@ const PinCard = ({
 
   return (
     <div>
+
       {
-    editing && <PinForm
-      formTitle='Edit Pin'
-      setPins={setPins}
-      firebaseKey={firebaseKey}
-      pinTitle={pinTitle}
-      imgUrl={imgUrl}
-      pinDescription={pinDescription}
-      uid={uid}
-      boardId={boardId}
-      privatePin={privatePin}
-      boards={boards}
-      user={user}
-    />}
-     <Card className="m-4 board-card" key={firebaseKey} inverse>
-      <div className="img-div">
-        <CardImg className="card-img" width="100%" src={imgUrl} alt={pinTitle} />
-      </div>
-      <div className="overlay"></div>
-      <CardImgOverlay>
-      <div className="card-content">
-          <CardTitle tag="h5">{pinTitle}</CardTitle>
-          <CardText>{pinDescription}</CardText>
-          {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
-          <div className='card-links'>
-            <CardLink className="edit-link" href="#" onClick={() => handleClick('edit')}>Edit</CardLink>
-            <CardLink className="delete-link" href="#" onClick={() => handleClick('delete')}>Delete</CardLink>
+      editing ? <>
+      <Card className="m-4 board-card">
+          <CardLink className="form-close" href="#" onClick={() => handleClick('edit')}>
+            {editing ? 'Close Form' : 'Edit Board'}
+          </CardLink>
+          <PinForm
+            formTitle='Edit Pin'
+            setPins={setPins}
+            firebaseKey={firebaseKey}
+            pinTitle={pinTitle}
+            imgUrl={imgUrl}
+            pinDescription={pinDescription}
+            uid={uid}
+            boardId={boardId}
+            privatePin={privatePin}
+            boards={boards}
+            user={user}
+            />
+      </Card>
+      </>
+        : <Card className="m-4 board-card" key={firebaseKey} inverse>
+          <div className="img-div">
+            <CardImg className="card-img" width="100%" src={imgUrl} alt={pinTitle} />
           </div>
-      </div>
-      </CardImgOverlay>
-    </Card>
+          <div className="overlay"></div>
+          <CardImgOverlay>
+          <div className="card-content">
+              <CardTitle tag="h5">{pinTitle}</CardTitle>
+              <CardText>{pinDescription}</CardText>
+              {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
+              <div className='card-links'>
+                <CardLink className="edit-link" href="#" onClick={() => handleClick('edit')}>Edit</CardLink>
+                <CardLink className="delete-link" href="#" onClick={() => handleClick('delete')}>Delete</CardLink>
+              </div>
+          </div>
+          </CardImgOverlay>
+        </Card>
+      }
     </div>
   );
 };

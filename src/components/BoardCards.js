@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  Card, CardText, CardBody, CardLink,
-  CardTitle,
+  Card, CardText, CardImgOverlay, CardLink,
+  CardTitle, CardImg
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import deleteBoardPins from '../helpers/data/pinBoardData';
@@ -48,22 +48,13 @@ const BoardCards = ({
 
   return (
     <div>
-      <Card className="m-4 board-card" key={firebaseKey}>
-        <CardBody>
-          <CardTitle tag="h5">{boardTitle}</CardTitle>
-        </CardBody>
-        <img width="100%" src={imgUrl} alt="Card image cap" />
-        <CardBody>
-          <CardText>{boardDescription}</CardText>
-          {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
-          <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
-          <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
-          {!privateBoard && <CardLink href="#" onClick={() => handleCardButton('share')}>Share</CardLink>}
-          <CardLink href="#" onClick={() => handleCardButton('edit')}>
-          {editing ? 'Close Form' : 'Edit Board'}
+      {
+      editing ? <>
+      <Card className="m-4 board-card">
+          <CardLink className="form-close" href="#" onClick={() => handleCardButton('edit')}>
+            {editing ? 'Close Form' : 'Edit Board'}
           </CardLink>
-          {
-            editing && <BoardForm
+          <BoardForm className='edit-form'
             formTitle='Edit Board'
             setBoards={setBoards}
             firebaseKey={firebaseKey}
@@ -73,11 +64,30 @@ const BoardCards = ({
             uid={uid}
             user={user}
             privateBoard={privateBoard}
-            />
-          }
-        </CardBody>
-      </Card>
-    </div>
+          />
+        </Card>
+        </>
+        : <Card className="m-4 board-card" inverse key={firebaseKey}>
+            <div className="img-div">
+              <CardImg className="card-img" width="100%" src={imgUrl} alt={boardTitle} />
+            </div>
+            <div className="overlay"></div>
+            <CardImgOverlay>
+            <div className="card-content">
+              <CardTitle tag="h5">{boardTitle}</CardTitle>
+              <CardText>{boardDescription}</CardText>
+                  {(privateBoard === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Board</CardText>}
+                  <CardLink href="#" onClick={() => handleCardButton('delete')}>Delete</CardLink>
+                  <CardLink href="#" onClick={() => handleCardButton('show-pins')}>Pins</CardLink>
+                  {!privateBoard && <CardLink href="#" onClick={() => handleCardButton('share')}>Share</CardLink>}
+                  <CardLink href="#" onClick={() => handleCardButton('edit')}>
+                  {editing ? 'Close Form' : 'Edit Board'}
+                  </CardLink>
+              </div>
+            </CardImgOverlay>
+          </Card>
+      }
+  </div>
   );
 };
 

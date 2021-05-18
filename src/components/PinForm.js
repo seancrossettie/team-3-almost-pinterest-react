@@ -84,7 +84,7 @@ const PinForm = ({
             name='imgUrl'
             id='imgUrl'
             value={pin.imgUrl}
-            type='text'
+            type='url'
             placeholder='Enter an Image URL'
             onChange={handleInputChange}
           />

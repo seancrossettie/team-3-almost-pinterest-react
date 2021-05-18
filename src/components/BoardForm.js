@@ -89,7 +89,7 @@ const BoardForm = ({
             name='imgUrl'
             id='imgUrl'
             value={board.imgUrl}
-            type='text'
+            type='url'
             placeholder='Enter an Image URL'
             onChange={handleInputChange}
           />

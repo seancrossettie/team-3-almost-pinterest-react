@@ -3,8 +3,9 @@ import {
   Card,
   CardText,
   CardTitle,
-  CardBody,
-  CardLink
+  CardImgOverlay,
+  CardLink,
+  CardImg
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { deletePin } from '../helpers/data/pinData';
@@ -39,34 +40,37 @@ const PinCard = ({
 
   return (
     <div>
-      <Card className="m-4 board-card" key={firebaseKey}>
-        <CardBody>
+      {
+    editing && <PinForm
+      formTitle='Edit Pin'
+      setPins={setPins}
+      firebaseKey={firebaseKey}
+      pinTitle={pinTitle}
+      imgUrl={imgUrl}
+      pinDescription={pinDescription}
+      uid={uid}
+      boardId={boardId}
+      privatePin={privatePin}
+      boards={boards}
+      user={user}
+    />}
+     <Card className="m-4 board-card" key={firebaseKey} inverse>
+      <div className="img-div">
+        <CardImg className="card-img" width="100%" src={imgUrl} alt={pinTitle} />
+      </div>
+      <div className="overlay"></div>
+      <CardImgOverlay>
+      <div className="card-content">
           <CardTitle tag="h5">{pinTitle}</CardTitle>
-        </CardBody>
-        <img width="100%" src={imgUrl} alt="Card image cap" />
-        <CardBody>
           <CardText>{pinDescription}</CardText>
           {(privatePin === true) && <CardText className="text-danger"><i className="fas fa-user-secret"></i> Private Pin</CardText>}
           <div className='card-links'>
             <CardLink className="edit-link" href="#" onClick={() => handleClick('edit')}>Edit</CardLink>
             <CardLink className="delete-link" href="#" onClick={() => handleClick('delete')}>Delete</CardLink>
           </div>
-          {
-          editing && <PinForm
-            formTitle='Edit Pin'
-            setPins={setPins}
-            firebaseKey={firebaseKey}
-            pinTitle={pinTitle}
-            imgUrl={imgUrl}
-            pinDescription={pinDescription}
-            uid={uid}
-            boardId={boardId}
-            privatePin={privatePin}
-            boards={boards}
-            user={user}
-          />}
-        </CardBody>
-      </Card>
+      </div>
+      </CardImgOverlay>
+    </Card>
     </div>
   );
 };

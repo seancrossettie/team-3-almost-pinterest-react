@@ -5,8 +5,14 @@
 }
 
 .board-card {
-  width: 20rem;
-  height: fit-content;
+  text-align: center;
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: $pinRed;
+  }
 }
 
 .edit-link {
@@ -45,4 +51,43 @@
 
 .card-links {
   text-align: center;
+}
+
+.card-img {
+  object-fit: cover;
+  background-position: center;
+  width: 350px;
+  height: 350px;
+  position: relative;
+  transition: .5s ease;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  transition: .5s ease;
+  color: $white;
+}
+
+.board-card:hover .card-img {
+  width: 360px;
+  height: 360px;
+  transition: .5s ease;
+}
+
+.card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;  
+  padding: 20px;
+}
+
+.form-close {
+  color: black !important;
+  padding-top: 20px;
 }

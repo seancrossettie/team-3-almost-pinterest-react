@@ -1,12 +1,15 @@
 import firebase from 'firebase/app';
 
 const signInGitHubUser = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new firebase.auth.GithubAuthProvider();
+  provider.addScope('repo');
+  provider.setCustomParameters({
+    allow_signup: 'false'
+  });
   firebase.auth().signInWithPopup(provider).then((result) => {
     const { credential } = result;
     const token = credential.accessToken;
-    const { user } = result;
-    console.warn(token, user);
+    console.warn(token);
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;

@@ -5,6 +5,8 @@ import PublicPin from '../styles/PublicPin';
 import { signInUser } from '../helpers/auth';
 import { getPublicPins } from '../helpers/data/pinData';
 import PublicPinCard from '../components/PublicPinCard';
+import { signInGitHubUser } from '../helpers/authGitHub';
+import GitHubLogo from '../assets/GitHubLogo.png';
 
 export default function Home({ user, setPins, boards }) {
   const [publicPins, setPublicPins] = useState([]);
@@ -44,6 +46,7 @@ export default function Home({ user, setPins, boards }) {
             <h1>To Pinterest!</h1>
             <h4>Sign in to get started</h4>
             <Button color='danger' onClick={signInUser}>Sign In</Button>
+            <img className="redCard" onClick={signInGitHubUser} src={GitHubLogo}/>
             <div className="home-text">
             {publicPins.map((publicPin) => (
             <PublicPinCard

@@ -1,7 +1,7 @@
 # Almost Pinterest - React 
 The purpose of this project is to recreate Almost Pinterest using react. This is a full CRUD application that the user can authenticate and create/read/update/delete boards and pins.
 
-(link to app)[https://almost-pinterest-react.netlify.app/]
+[Link to app](https://almost-pinterest-react.netlify.app/)
 
 ## Features
 1. The user can create new Board

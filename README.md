@@ -1,4 +1,4 @@
-# Almost Pinterest - React 
+# Almost Pinterest [![Netlify Status](https://api.netlify.com/api/v1/badges/0b7300d0-9b6a-4ecb-bf92-f8d0172404ea/deploy-status)](https://app.netlify.com/sites/almost-pinterest-react/deploys)
 The purpose of this project is to recreate Almost Pinterest using react. This is a full CRUD application that the user can authenticate and create/read/update/delete boards and pins.
 
 [Link to app](https://almost-pinterest-react.netlify.app/)
